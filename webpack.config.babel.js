@@ -133,14 +133,14 @@ plugins: [
       title: 'phpwind Fans',
       filename: path.join(__dirname, 'index.html'),
       template: path.resolve(__dirname, 'src/index.html'),
-      favicon: path.resolve(__dirname, '../favicon.ico'),
+      favicon: path.resolve(__dirname, './favicon.ico'),
     }),
   ],
   // Prod plugin.
   ...(isProd ? [
     new webpack.optimize.UglifyJsPlugin({
       compress: {
-      warnings: false
+        warnings: false
       },
       sourceMap: false
     }),
