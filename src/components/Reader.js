@@ -2,21 +2,13 @@ import React, { Component, PropTypes } from 'react';
 import axios from 'axios';
 import Paper from 'material-ui/Paper';
 import marked from 'marked';
-import { highlight } from 'highlight.js';
+import { highlightAuto } from 'highlight.js';
 
 import '../styles/mui-github-markdown.css';
 import 'highlight.js/styles/default.css';
 
-const langAlias = lang => {
-  const alias = {
-    json5: 'json',
-  };
-
-  return alias[lang] || lang;
-}
-
 marked.setOptions({
-  highlight: (code, lang) => highlight(langAlias(lang), code).value
+  highlight: (code) => highlightAuto(code).value
 });
 
 class ReaderComponent extends Component {
