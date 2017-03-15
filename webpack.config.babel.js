@@ -99,7 +99,14 @@ module: {
       test: /\.css$/,
       use: ExtractTextPlugin.extract({
         fallback: "style-loader",
-        use: 'css-loader'
+        use: [
+          {
+            loader: 'css-loader',
+            options: {
+              minimize: isProd
+            }
+          }
+        ]
       })
     },
     {
@@ -134,6 +141,8 @@ plugins: [
       filename: path.join(__dirname, 'index.html'),
       template: path.resolve(__dirname, 'src/index.html'),
       favicon: path.resolve(__dirname, './favicon.ico'),
+      minify: false,
+      hash: true,
     }),
   ],
   // Prod plugin.

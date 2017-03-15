@@ -17,13 +17,15 @@
     "html-webpack-plugin": "^2.28.0",
     "path": "^0.12.7",
     "style-loader": "^0.13.2",
+    "trash-cli": "^1.4.0",
     "url-loader": "^0.5.8",
     "webpack": "^2.2.1"
   },
   "scripts": {
-    "dev": "cross-env NODE_ENV=development webpack --progress --hide-modules --colors",
-    "watch": "cross-env NODE_ENV=development webpack --progress --hide-modules --colors --watch",
-    "dist": "cross-env NODE_ENV=production webpack --display-error-details --progress --colors"
+    "clean-dist": "trash dist index.html",
+    "dev": "npm run clean-dist && cross-env NODE_ENV=development webpack --progress --hide-modules --colors",
+    "watch": "npm run clean-dist && cross-env NODE_ENV=development webpack --progress --hide-modules --colors --watch",
+    "dist": "npm run clean-dist && cross-env NODE_ENV=production webpack --display-error-details --progress --colors"
   },
   "dependencies": {
     "axios": "^0.15.3",
