@@ -9,6 +9,10 @@
       {
         "name": "介绍",
         "md": "/introduction"
+      },
+      {
+        "name": "贡献指南",
+        "md": "/contributing"
       }
     ]
   }
