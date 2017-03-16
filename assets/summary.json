@@ -11,6 +11,10 @@
         "md": "/introduction"
       },
       {
+        "name": "发行说明",
+        "md": "/releases"
+      },
+      {
         "name": "贡献指南",
         "md": "/contributing"
       }
