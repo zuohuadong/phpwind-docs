@@ -39,10 +39,7 @@ class MainComponent extends Component {
   };
 
   handleRequestHome = () => {
-    if (this.getPathname() !== '/') {
-      const { router: { history: { push } } } = this.context;
-      push('/');
-    }
+    this.handleRequestHomeNotToggle();
     this.handleToggle();
   };
 
@@ -59,7 +56,6 @@ class MainComponent extends Component {
   }
 
   componentDidMount() {
-    console.log(this.context.muiTheme);
     if (this.getPathname() !== '/' && this.props.width !== SMALL) {
       this.setState({
         ...this.state,
