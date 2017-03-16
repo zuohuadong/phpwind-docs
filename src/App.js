@@ -1,27 +1,18 @@
 import React, { Component } from 'react';
-import { BrowserRouter } from 'react-router-dom';
+import { HashRouter } from 'react-router-dom';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import lightBaseTheme from 'material-ui/styles/baseThemes/lightBaseTheme';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
-import Main from './components/Main';
 
 const theme = getMuiTheme(lightBaseTheme);
 
-let basename = '';
-if (window.location.hostname === 'medz.github.io') {
-  basename = '/phpwind';
-}
-
-const supportsHistory = 'pushState' in window.history;
+import Main from './components/Main';
 
 const App = () => (
   <MuiThemeProvider muiTheme={theme}>
-    <BrowserRouter
-      basename={basename}
-      forceRefresh={supportsHistory}
-    >
+    <HashRouter>
       <Main />
-    </BrowserRouter>
+    </HashRouter>
   </MuiThemeProvider>
 );
 
