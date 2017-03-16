@@ -11,7 +11,7 @@ Fans 版源代码贡献指南
 
 请记住，错误反馈的初衷是让其它有相同问题的人可以协作解决问题。不要期望反馈错误后会很快有人会马上修复它。创建错误反馈主要是为了能帮助你自己和其他人开始着手修复问题。
 
-*Fans* 源代码托管在 *GitHub* 上面: [medz/phpwind](https://github.com/medz/phpwind)。
+> *Fans* 源代码托管在 *GitHub* 上面: [medz/phpwind](https://github.com/medz/phpwind)。
 
 ## 核心开发讨论
 
@@ -27,7 +27,7 @@ Fans 版源代码贡献指南
 
 次要的 且与现有的 Fans 发布版本 完全向下兼容 的功能可以发送到最新的稳定分支。
 
-如果不确定你的功能是主要的还是次要的，请在 QQ 群文 Seven Du。
+如果不确定你的功能是主要的还是次要的，请在 QQ 群问 Seven Du。
 
 ## 安全漏洞
 
