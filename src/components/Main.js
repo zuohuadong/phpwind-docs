@@ -69,7 +69,7 @@ class MainComponent extends Component {
       <MuiThemeProvider muiTheme={getMuiTheme(lightBaseTheme)}>
         <div>
           <AppBar
-            title="phpwind Fans"
+            title={pathname !== '/' ? 'phpwind Fans' : ''}
             iconElementRight={
               <IconButton
                 href="https://github.com/medz/phpwind"
