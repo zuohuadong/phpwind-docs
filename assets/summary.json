@@ -15,6 +15,19 @@
         "md": "/releases"
       },
       {
+        "name": "升级索引",
+        "item": [
+          {
+            "name": "升级说明",
+            "md": "/get-started/upgrade-introduction"
+          },
+          {
+            "name": "phpwind 9 升级 Fans 1.0",
+            "md": "/get-started/phpwind9-1.0"
+          }
+        ]
+      },
+      {
         "name": "贡献指南",
         "md": "/contributing"
       }
