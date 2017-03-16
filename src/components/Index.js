@@ -1,25 +1,33 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 
 class IndexComponent extends Component {
+
+  static contextTypes = {
+    muiTheme: PropTypes.object.isRequired,
+  };
+
   render() {
+
+    const { muiTheme: { appBar } } = this.context;
+
     return (
       <div
         style={{
-          backgroundColor: "#00bcd4",
+          backgroundColor: appBar.color,
           textAlign:'center',
           paddingBottom: 15
         }}
       >
         <h1 style={{
           fontWeight: 300,
-          color: '#fff'
+          color: appBar.textColor
         }}
         >
           phpwind Fans
         </h1>
         <h2
           style={{
-            color: 'rgba(255, 255, 255, 0.870588)',
+            color: appBar.textColor,
             fontWeight: 300,
             fontSize: 20,
             lineHeight: '28px',

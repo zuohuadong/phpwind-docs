@@ -1,7 +1,4 @@
 import React, { Component, PropTypes } from 'react';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import lightBaseTheme from 'material-ui/styles/baseThemes/lightBaseTheme';
-import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import withWidth, { SMALL } from 'material-ui/utils/withWidth';
 import { Route } from 'react-router-dom';
 import AppBar from 'material-ui/AppBar';
@@ -19,6 +16,7 @@ class MainComponent extends Component {
 
   static contextTypes = {
     router: PropTypes.object.isRequired,
+    muiTheme: PropTypes.object.isRequired,
   };
 
   state = {
@@ -48,12 +46,20 @@ class MainComponent extends Component {
     this.handleToggle();
   };
 
+  handleRequestHomeNotToggle = () => {
+    if (this.getPathname() !== '/') {
+      const { router: { history: { push } } } = this.context;
+      push('/');
+    }
+  }
+
   getPathname() {
     const { router: { route: { location: { pathname } } } } = this.context;
     return pathname;
   }
 
   componentDidMount() {
+    console.log(this.context.muiTheme);
     if (this.getPathname() !== '/' && this.props.width !== SMALL) {
       this.setState({
         ...this.state,
@@ -64,45 +70,51 @@ class MainComponent extends Component {
 
   render() {
     const pathname = this.getPathname();
+    const { muiTheme: { appBar } } = this.context;
 
     return (
-      <MuiThemeProvider muiTheme={getMuiTheme(lightBaseTheme)}>
-        <div>
-          <AppBar
-            title={pathname !== '/' ? 'phpwind Fans' : ''}
-            iconElementRight={
-              <IconButton
-                href="https://github.com/medz/phpwind"
-                tooltip="点击浏览 phpwind Fans 代码仓库"
-                tooltipPosition="bottom-left"
-              >
-                <GitHub color="#fff" />
-              </IconButton>
-            }
-            onLeftIconButtonTouchTap={this.handleToggle}
-            zDepth={0}
-          />
-          <AppNavDrawer
-            open={this.state.open}
-            value={pathname}
-            docked={this.props.width !== SMALL}
-            handleClose={this.handleToggle}
-            onChangeList={this.handleChangeList}
-            handleRequestHome={this.handleRequestHome}
-          />
-          <Route exact path="/" component={Index} />
-          <div
-            style={{
-              transition: 'all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms',
-              ...(this.state.open && this.props.width !== SMALL ? {
-                paddingLeft: 256
-              } : {})
-            }}
-          >
-            <Route path="/:path" component={Reader} />
-          </div>
+      <div style={{
+        paddingTop: appBar.height
+      }}>
+        <AppBar
+          title={pathname !== '/' ? 'phpwind Fans' : ''}
+          iconElementRight={
+            <IconButton
+              href="https://github.com/medz/phpwind"
+              tooltip="点击浏览 phpwind Fans 代码仓库"
+              tooltipPosition="bottom-left"
+            >
+              <GitHub color={appBar.textColor} />
+            </IconButton>
+          }
+          onLeftIconButtonTouchTap={this.handleToggle}
+          zDepth={0}
+          onTitleTouchTap={this.handleRequestHomeNotToggle}
+          style={{
+            position: 'fixed',
+            top: 0
+          }}
+        />
+        <AppNavDrawer
+          open={this.state.open}
+          value={pathname}
+          docked={this.props.width !== SMALL}
+          handleClose={this.handleToggle}
+          onChangeList={this.handleChangeList}
+          handleRequestHome={this.handleRequestHome}
+        />
+        <Route exact path="/" component={Index} />
+        <div
+          style={{
+            transition: 'all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms',
+            ...(this.state.open && this.props.width !== SMALL ? {
+              paddingLeft: 256
+            } : {})
+          }}
+        >
+          <Route path="/:path" component={Reader} />
         </div>
-      </MuiThemeProvider>
+      </div>
     );
   }
 }

@@ -48,7 +48,7 @@ class ReaderComponent extends Component {
         ...this.state,
         markdowns: {
           ...this.state.markdowns,
-          [pathname]: data
+          [pathname]: marked(data)
         }
       });
     })
@@ -66,7 +66,7 @@ class ReaderComponent extends Component {
         >
           <div
             className="markdown-body"
-            dangerouslySetInnerHTML={{__html: marked(markdown)}}
+            dangerouslySetInnerHTML={{__html: markdown}}
             style={{
               marginTop: 20,
               marginBottom: 20,
