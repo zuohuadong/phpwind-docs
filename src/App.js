@@ -8,8 +8,8 @@ import Main from './components/Main';
 const theme = getMuiTheme(lightBaseTheme);
 
 let basename = '';
-if (window.location.hostname === 'github.com') {
-  basename = '/' + window.location.pathname.split('/')[1];
+if (window.location.hostname === 'medz.github.io') {
+  basename = '/phpwind';
 }
 
 const supportsHistory = 'pushState' in window.history;
