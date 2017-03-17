@@ -106,7 +106,7 @@ class AppBarDrawerComponent extends Component {
 
         <Divider />
 
-        <SelectableList value={pathname} onChange={({}, md) => handleRequestMarkdown(md)} >
+        <SelectableList value={pathname} onChange={({}, md) => handleRequestMarkdown(md, width === SMALL)} >
           {appBarSummary}
         </SelectableList>
 

@@ -23,6 +23,13 @@ class MainComponent extends Component {
     muiTheme: PropTypes.object.isRequired,
   };
 
+  componentDidMount() {
+    const { width } = this.props;
+    if (width !== SMALL) {
+      this.props.handleOpenAppBar();
+    }
+  }
+
   render() {
     const { muiTheme: { appBar } } = this.context;
     const { status, pathname, width, handleOpenAppBar, handleCloseAppBar, handleRequestHome, IndexChildren, ReaderChildren } = this.props;

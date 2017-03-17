@@ -33,9 +33,12 @@ class AppBarDrawerContainer extends Component {
   languagesLoadding = false;
   summaryLoadding = false;
 
-  handleRequestMarkdown = path => {
+  handleRequestMarkdown = (path, closeAppBar = false) => {
     const { router: { history: { push } } } = this.context;
     push(path);
+    if (closeAppBar === true) {
+      this.props.handleCloseAppBar();
+    }
   };
 
   componentDidUpdate() {

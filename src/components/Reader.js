@@ -14,7 +14,7 @@ class ReaderComponent extends Component {
     const { doc } = this.props;
 
     return (
-      <Paper>
+      <Paper zDepth={0}>
         <div
           className="markdown-body"
           dangerouslySetInnerHTML={{__html: doc}}

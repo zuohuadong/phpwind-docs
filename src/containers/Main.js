@@ -39,7 +39,7 @@ class MainContainer extends Component {
       this.handleCloseAppBar();
     }
   };
-
+ 
   getPathname() {
     const { router: { route: { location: { pathname } } } } = this.context;
     return pathname;
