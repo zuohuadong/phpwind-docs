@@ -1,83 +1,31 @@
 import React, { Component, PropTypes } from 'react';
-import axios from 'axios';
 import Paper from 'material-ui/Paper';
-import marked from 'marked';
-import { highlightAuto } from 'highlight.js';
-
 import '../styles/mui-github-markdown.css';
 import 'highlight.js/styles/default.css';
-
-marked.setOptions({
-  highlight: (code) => highlightAuto(code).value
-});
 
 class ReaderComponent extends Component {
 
   static propTypes = {
-    location: PropTypes.object.isRequired,
+    doc: PropTypes.string.isRequired,
   };
 
-  state = {
-    markdowns: {},
-    loadding: false
-  };
-
-  getPathname(props = false) {
-    const { location: { pathname = '/introduction' } } = props || this.props;
-
-    return pathname;
-  }
-
-  componentWillReceiveProps(props, load = false) {
-    const oldPathname = this.getPathname();
-    const pathname = this.getPathname(props);
-    if ((oldPathname !== pathname && !this.state.markdowns.hasOwnProperty(pathname)) || load === true) {
-      this.handleRequestMarkdown(props);
-    }
-  }
-
-  componentDidMount() {
-    this.componentWillReceiveProps(this.props, true);
-  }
-
-  handleRequestMarkdown(props = false) {
-    const pathname = this.getPathname(props);
-    axios.get(`./assets${pathname}.md`)
-    .then(({ data }) => {
-      this.setState({
-        ...this.state,
-        markdowns: {
-          ...this.state.markdowns,
-          [pathname]: marked(data)
-        }
-      });
-    })
-    .catch(() => {});
-  }
 
   render() {
-    const pathname = this.getPathname();
-    const markdown = this.state.markdowns[pathname] || '';
+    const { doc } = this.props;
 
-    if (this.state.loadding === false) {
-      return (
-        <Paper
-          zDepth={0}
-        >
-          <div
-            className="markdown-body"
-            dangerouslySetInnerHTML={{__html: markdown}}
-            style={{
-              marginTop: 20,
-              marginBottom: 20,
-              padding: '0 10px'
-            }}
-          />
-        </Paper>
-      );
-    }
-
-    return null;
+    return (
+      <Paper>
+        <div
+          className="markdown-body"
+          dangerouslySetInnerHTML={{__html: doc}}
+          style={{
+            marginTop: 20,
+            marginBottom: 20,
+            padding: '0 10px'
+          }}
+        />
+      </Paper>
+    );
   }
 }
 

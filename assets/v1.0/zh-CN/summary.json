@@ -1,35 +1,35 @@
 [
   {
     "name": "2017 开发计划",
-    "md": "/2017-dev"
+    "md": "2017-dev"
   },
   {
     "name": "开始",
     "item": [
       {
         "name": "介绍",
-        "md": "/introduction"
+        "md": "introduction"
       },
       {
         "name": "发行说明",
-        "md": "/releases"
+        "md": "releases"
       },
       {
         "name": "升级索引",
         "item": [
           {
             "name": "升级说明",
-            "md": "/get-started/upgrade-introduction"
+            "md": "get-started/upgrade-introduction"
           },
           {
             "name": "phpwind 9 升级 Fans 1.0",
-            "md": "/get-started/phpwind9-1.0"
+            "md": "get-started/phpwind9-1.0"
           }
         ]
       },
       {
         "name": "贡献指南",
-        "md": "/contributing"
+        "md": "contributing"
       }
     ]
   },
@@ -38,7 +38,7 @@
     "item": [
       {
         "name": "安装",
-        "md": "/installed/installation"
+        "md": "installed/installation"
       }
     ]
   }

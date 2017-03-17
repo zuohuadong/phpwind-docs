@@ -1,79 +1,38 @@
 import React, { Component, PropTypes } from 'react';
 import withWidth, { SMALL } from 'material-ui/utils/withWidth';
-import { Route } from 'react-router-dom';
 import AppBar from 'material-ui/AppBar';
 import IconButton from 'material-ui/IconButton';
 import GitHub from '../icons/GitHub';
-import Index from './Index';
-import AppNavDrawer from './AppNavDrawer';
-import Reader from './Reader';
+
+import AppBarDrawer from '../containers/AppBarDrawer';
 
 class MainComponent extends Component {
 
   static propTypes = {
     width: PropTypes.number.isRequired,
+    pathname: PropTypes.string.isRequired,
+    status: PropTypes.bool.isRequired,
+    handleCloseAppBar: PropTypes.func.isRequired,
+    handleOpenAppBar: PropTypes.func.isRequired,
+    handleRequestHome: PropTypes.func.isRequired,
+    IndexChildren: PropTypes.object.isRequired,
+    ReaderChildren: PropTypes.object.isRequired,
   };
 
   static contextTypes = {
-    router: PropTypes.object.isRequired,
     muiTheme: PropTypes.object.isRequired,
   };
 
-  state = {
-    open: false
-  };
-
-  handleToggle = () => {
-    this.setState({
-      ...this.state,
-      open: !this.state.open
-    });
-  };
-
-  handleChangeList = (event, value) => {
-    if (this.props.width === SMALL) {
-      this.handleToggle();
-    }
-    const { router: { history: { push } } } = this.context;
-    push(value);
-  };
-
-  handleRequestHome = () => {
-    this.handleRequestHomeNotToggle();
-    this.handleToggle();
-  };
-
-  handleRequestHomeNotToggle = () => {
-    if (this.getPathname() !== '/') {
-      const { router: { history: { push } } } = this.context;
-      push('/');
-    }
-  }
-
-  getPathname() {
-    const { router: { route: { location: { pathname } } } } = this.context;
-    return pathname;
-  }
-
-  componentDidMount() {
-    if (this.getPathname() !== '/' && this.props.width !== SMALL) {
-      this.setState({
-        ...this.state,
-        open: true
-      });
-    }
-  }
-
   render() {
-    const pathname = this.getPathname();
     const { muiTheme: { appBar } } = this.context;
+    const { status, pathname, width, handleOpenAppBar, handleCloseAppBar, handleRequestHome, IndexChildren, ReaderChildren } = this.props;
 
     return (
       <div style={{
         paddingTop: appBar.height
       }}>
         <AppBar
-          title={pathname !== '/' ? 'phpwind Fans' : ''}
+          title={pathname !== '/' ? ' Fans' : ''}
           iconElementRight={
             <IconButton
               href="https://github.com/medz/phpwind"
@@ -83,32 +42,30 @@ class MainComponent extends Component {
               <GitHub color={appBar.textColor} />
             </IconButton>
           }
-          onLeftIconButtonTouchTap={this.handleToggle}
+          onLeftIconButtonTouchTap={handleOpenAppBar}
           zDepth={0}
-          onTitleTouchTap={this.handleRequestHomeNotToggle}
+          onTitleTouchTap={handleRequestHome}
           style={{
             position: 'fixed',
             top: 0
           }}
         />
-        <AppNavDrawer
-          open={this.state.open}
-          value={pathname}
-          docked={this.props.width !== SMALL}
-          handleClose={this.handleToggle}
-          onChangeList={this.handleChangeList}
-          handleRequestHome={this.handleRequestHome}
+        <AppBarDrawer
+          pathname={pathname}
+          handleCloseAppBar={handleCloseAppBar}
+          handleOpenAppBar={handleOpenAppBar}
+          handleRequestHome={handleRequestHome}
         />
-        <Route exact path="/" component={Index} />
+        {IndexChildren}
         <div
           style={{
             transition: 'all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms',
-            ...(this.state.open && this.props.width !== SMALL ? {
+            ...(status && width !== SMALL ? {
               paddingLeft: 256
             } : {})
           }}
         >
-          <Route path="/:path" component={Reader} />
+         {ReaderChildren}
         </div>
       </div>
     );
