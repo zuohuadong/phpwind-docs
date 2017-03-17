@@ -32,5 +32,14 @@
         "md": "/contributing"
       }
     ]
+  },
+  {
+    "name": "入门指南",
+    "item": [
+      {
+        "name": "安装",
+        "md": "/installed/installation"
+      }
+    ]
   }
 ]
