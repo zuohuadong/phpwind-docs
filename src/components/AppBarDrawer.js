@@ -30,6 +30,7 @@ class AppBarDrawerComponent extends Component {
     handleRequestHome: PropTypes.func.isRequired,
     handleRequestMarkdown: PropTypes.func.isRequired,
     handleChangeLanguage: PropTypes.func.isRequired,
+    handleChangeVersion: PropTypes.func.isRequired,
   };
 
   getAppBarSummary(summary) {
@@ -54,7 +55,7 @@ class AppBarDrawerComponent extends Component {
 
     const {
       width, status, version, versions, language, languages, summary, pathname,
-      handleCloseAppBar, handleRequestHome, handleRequestMarkdown, handleChangeLanguage
+      handleCloseAppBar, handleRequestHome, handleRequestMarkdown, handleChangeLanguage, handleChangeVersion
     } = this.props;
 
     const appBarSummary = this.getAppBarSummary(summary);
@@ -86,10 +87,11 @@ class AppBarDrawerComponent extends Component {
             primaryText={`Version: ${version}`}
             leftIcon={<ActionList />}
             primaryTogglesNestedList={true}
-            nestedItems={versions.map(version => (
+            nestedItems={versions.map(_version => (
               <ListItem
-                key={version}
-                primaryText={version}
+                key={_version}
+                primaryText={_version}
+                onTouchTap={() => _version !== version ? handleChangeVersion(_version) : null}
               />
             ))}
           />

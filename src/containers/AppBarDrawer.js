@@ -43,11 +43,20 @@ class AppBarDrawerContainer extends Component {
 
   handleChangeLanguage = (language) => {
     const { current: version, dispatch, pathname } = this.props;
-    const { router: { history: { push } } } = this.context;
     if (pathname !== '/') {
+      const { router: { history: { push } } } = this.context;
       push('/');
     }
     dispatch(changeLanguageCurrent(version, language));
+  };
+
+  handleChangeVersion = (version) => {
+    const { dispatch, pathname } = this.props;
+    if (pathname !== '/') {
+      const { router: { history: { push } } } = this.context;
+      push('/');
+    }
+    dispatch(current(version));
   };
 
   componentDidUpdate() {
@@ -68,10 +77,9 @@ class AppBarDrawerContainer extends Component {
     }
 
     const summaryloaddingName = `${version}/${current}`;
-    console.log(summary);
     if (version && current && !summary && this.summaryLoadding !== summaryloaddingName) {
       this.summaryLoadding = summaryloaddingName;
-      axios.get(`./assets/${version}/${current}/summary.json`)
+      axios.get(`./assets/${version}/${current}/summary.json`, { responseType: 'json' })
       .then(({ data }) => {
         dispatch(changeLanguagesSummary(version, current, data));
         this.summaryLoadding = false;
@@ -83,11 +91,11 @@ class AppBarDrawerContainer extends Component {
   }
 
   componentDidMount() {
-    const { dispatch, current: version } = this.props;
+    const { dispatch, current: version, pathname } = this.props;
     axios.get('./assets/versions.json')
     .then(({ data }) => {
       dispatch(set(data.version));
-      if (!version) {
+      if (!version && pathname === '/') {
         dispatch(current(data.latest));
       }
     }).catch(() => {
@@ -115,6 +123,7 @@ class AppBarDrawerContainer extends Component {
         handleRequestHome={handleRequestHome}
         handleRequestMarkdown={this.handleRequestMarkdown}
         handleChangeLanguage={this.handleChangeLanguage}
+        handleChangeVersion={this.handleChangeVersion}
       />
     );
   }

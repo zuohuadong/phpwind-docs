@@ -17128,7 +17128,8 @@ var AppBarDrawerComponent = function (_Component) {
           handleCloseAppBar = _props2.handleCloseAppBar,
           handleRequestHome = _props2.handleRequestHome,
           handleRequestMarkdown = _props2.handleRequestMarkdown,
-          handleChangeLanguage = _props2.handleChangeLanguage;
+          handleChangeLanguage = _props2.handleChangeLanguage,
+          handleChangeVersion = _props2.handleChangeVersion;
 
 
       var appBarSummary = this.getAppBarSummary(summary);
@@ -17162,10 +17163,13 @@ var AppBarDrawerComponent = function (_Component) {
             primaryText: 'Version: ' + version,
             leftIcon: _react2.default.createElement(_list2.default, null),
             primaryTogglesNestedList: true,
-            nestedItems: versions.map(function (version) {
+            nestedItems: versions.map(function (_version) {
               return _react2.default.createElement(_List.ListItem, {
-                key: version,
-                primaryText: version
+                key: _version,
+                primaryText: _version,
+                onTouchTap: function onTouchTap() {
+                  return _version !== version ? handleChangeVersion(_version) : null;
+                }
               });
             })
           }),
@@ -17235,7 +17239,8 @@ AppBarDrawerComponent.propTypes = {
   handleCloseAppBar: _react.PropTypes.func.isRequired,
   handleRequestHome: _react.PropTypes.func.isRequired,
   handleRequestMarkdown: _react.PropTypes.func.isRequired,
-  handleChangeLanguage: _react.PropTypes.func.isRequired
+  handleChangeLanguage: _react.PropTypes.func.isRequired,
+  handleChangeVersion: _react.PropTypes.func.isRequired
 };
 exports.default = (0, _withWidth2.default)()(AppBarDrawerComponent);
 
@@ -17617,12 +17622,24 @@ var AppBarDrawerContainer = function (_Component) {
           version = _this$props.current,
           dispatch = _this$props.dispatch,
           pathname = _this$props.pathname;
-      var push = _this.context.router.history.push;
 
       if (pathname !== '/') {
+        var push = _this.context.router.history.push;
+
         push('/');
       }
       dispatch((0, _language.changeLanguageCurrent)(version, language));
+    }, _this.handleChangeVersion = function (version) {
+      var _this$props2 = _this.props,
+          dispatch = _this$props2.dispatch,
+          pathname = _this$props2.pathname;
+
+      if (pathname !== '/') {
+        var push = _this.context.router.history.push;
+
+        push('/');
+      }
+      dispatch((0, _version.current)(version));
     }, _temp), _possibleConstructorReturn(_this, _ret);
   }
 
@@ -17658,10 +17675,9 @@ var AppBarDrawerContainer = function (_Component) {
       }
 
       var summaryloaddingName = version + '/' + current;
-      console.log(summary);
       if (version && current && !summary && this.summaryLoadding !== summaryloaddingName) {
         this.summaryLoadding = summaryloaddingName;
-        _axios2.default.get('./assets/' + version + '/' + current + '/summary.json').then(function (_ref3) {
+        _axios2.default.get('./assets/' + version + '/' + current + '/summary.json', { responseType: 'json' }).then(function (_ref3) {
           var data = _ref3.data;
 
           dispatch((0, _language.changeLanguagesSummary)(version, current, data));
@@ -17676,13 +17692,14 @@ var AppBarDrawerContainer = function (_Component) {
     value: function componentDidMount() {
       var _props2 = this.props,
           dispatch = _props2.dispatch,
-          version = _props2.current;
+          version = _props2.current,
+          pathname = _props2.pathname;
 
       _axios2.default.get('./assets/versions.json').then(function (_ref4) {
         var data = _ref4.data;
 
         dispatch((0, _version.set)(data.version));
-        if (!version) {
+        if (!version && pathname === '/') {
           dispatch((0, _version.current)(data.latest));
         }
       }).catch(function () {
@@ -17721,7 +17738,8 @@ var AppBarDrawerContainer = function (_Component) {
         handleCloseAppBar: handleCloseAppBar,
         handleRequestHome: handleRequestHome,
         handleRequestMarkdown: this.handleRequestMarkdown,
-        handleChangeLanguage: this.handleChangeLanguage
+        handleChangeLanguage: this.handleChangeLanguage,
+        handleChangeVersion: this.handleChangeVersion
       });
     }
   }]);
