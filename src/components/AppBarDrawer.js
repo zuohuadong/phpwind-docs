@@ -11,6 +11,7 @@ import { List, ListItem, makeSelectable } from 'material-ui/List';
 import Subheader from 'material-ui/Subheader';
 import GitHub from '../icons/GitHub';
 import Divider from 'material-ui/Divider';
+import { Link } from 'react-router-dom'
 
 const SelectableList = makeSelectable(List);
 
@@ -28,6 +29,7 @@ class AppBarDrawerComponent extends Component {
     handleCloseAppBar: PropTypes.func.isRequired,
     handleRequestHome: PropTypes.func.isRequired,
     handleRequestMarkdown: PropTypes.func.isRequired,
+    handleChangeLanguage: PropTypes.func.isRequired,
   };
 
   getAppBarSummary(summary) {
@@ -37,7 +39,7 @@ class AppBarDrawerComponent extends Component {
     return summary.map(({ name, md, item = [] }) => {
       const isNested = !!item.length;
       const value = `/${version}/${language}/${md}`;
-      let params = { key: value, value, primaryText: name };
+      let params = { key: value, value, primaryText: name, 'data-md': md };
 
       if (isNested) {
         const key = `/${version}/${language}/${name}`;
@@ -52,7 +54,7 @@ class AppBarDrawerComponent extends Component {
 
     const {
       width, status, version, versions, language, languages, summary, pathname,
-      handleCloseAppBar, handleRequestHome, handleRequestMarkdown,
+      handleCloseAppBar, handleRequestHome, handleRequestMarkdown, handleChangeLanguage
     } = this.props;
 
     const appBarSummary = this.getAppBarSummary(summary);
@@ -95,10 +97,11 @@ class AppBarDrawerComponent extends Component {
             primaryText={`Language: ${language}`}
             leftIcon={<ActionTranslate />}
             primaryTogglesNestedList={true}
-            nestedItems={languages.map(language => (
+            nestedItems={languages.map(_language => (
               <ListItem
-                key={`${version}/${language}`}
-                primaryText={language}
+                key={`${version}/${_language}`}
+                primaryText={_language}
+                onTouchTap={() => _language !== language ? handleChangeLanguage(_language) : null}
               />
             ))}
           />

@@ -31,7 +31,7 @@ export default function (state = defaultState, { type, version, languages, curre
         ...state,
         [version]: {
           ...data,
-          summary
+          [current]: summary
         }
       };
 

@@ -41,9 +41,19 @@ class AppBarDrawerContainer extends Component {
     }
   };
 
+  handleChangeLanguage = (language) => {
+    const { current: version, dispatch, pathname } = this.props;
+    const { router: { history: { push } } } = this.context;
+    if (pathname !== '/') {
+      push('/');
+    }
+    dispatch(changeLanguageCurrent(version, language));
+  };
+
   componentDidUpdate() {
     const { current: version, languages: allLanguage, dispatch } = this.props;
-    const { [version]: { languages, current, summary } = {} } = allLanguage;
+    const { [version]: { languages, current } = {} } = allLanguage;
+    const { [version]: { [current]: summary } = {} } = allLanguage;
       
     if (version && !languages && this.languagesLoadding !== current) {
       this.languagesLoadding = current;
@@ -58,6 +68,7 @@ class AppBarDrawerContainer extends Component {
     }
 
     const summaryloaddingName = `${version}/${current}`;
+    console.log(summary);
     if (version && current && !summary && this.summaryLoadding !== summaryloaddingName) {
       this.summaryLoadding = summaryloaddingName;
       axios.get(`./assets/${version}/${current}/summary.json`)
@@ -89,7 +100,8 @@ class AppBarDrawerContainer extends Component {
       current: version, versions, languages: allLanguage, status, pathname,
       handleCloseAppBar, handleRequestHome,
     } = this.props;
-    const { [version]: { current: language, languages = [], summary = [] } = {} } = allLanguage;
+    const { [version]: { current: language, languages = [] } = {} } = allLanguage;
+    const { [version]: { [language]: summary = [] } = {} } = allLanguage;
     return (
       <AppBarDrawerComponent
         status={status}
@@ -102,6 +114,7 @@ class AppBarDrawerContainer extends Component {
         handleCloseAppBar={handleCloseAppBar}
         handleRequestHome={handleRequestHome}
         handleRequestMarkdown={this.handleRequestMarkdown}
+        handleChangeLanguage={this.handleChangeLanguage}
       />
     );
   }
