@@ -5,6 +5,7 @@ import IconButton from 'material-ui/IconButton';
 import GitHub from '../icons/GitHub';
 
 import AppBarDrawer from '../containers/AppBarDrawer';
+import FansTitle from './FansTitle';
 
 class MainComponent extends Component {
 
@@ -24,8 +25,8 @@ class MainComponent extends Component {
   };
 
   componentDidMount() {
-    const { width } = this.props;
-    if (width !== SMALL) {
+    const { width, pathname } = this.props;
+    if (width !== SMALL && pathname !== '/') {
       this.props.handleOpenAppBar();
     }
   }
@@ -39,7 +40,7 @@ class MainComponent extends Component {
         paddingTop: appBar.height
       }}>
         <AppBar
-          title={pathname !== '/' ? 'phpwind Fans' : ''}
+          title={pathname !== '/' ? <FansTitle /> : ''}
           iconElementRight={
             <IconButton
               href="https://github.com/medz/phpwind"

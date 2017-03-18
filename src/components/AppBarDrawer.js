@@ -11,7 +11,8 @@ import { List, ListItem, makeSelectable } from 'material-ui/List';
 import Subheader from 'material-ui/Subheader';
 import GitHub from '../icons/GitHub';
 import Divider from 'material-ui/Divider';
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
+import FansTitle from './FansTitle';
 
 const SelectableList = makeSelectable(List);
 
@@ -68,7 +69,7 @@ class AppBarDrawerComponent extends Component {
         onRequestChange={handleCloseAppBar}
       >
         <AppBar
-          title="phpwind Fans"
+          title={<FansTitle />}
           iconElementLeft={
             <IconButton>
               <NavigationClose />

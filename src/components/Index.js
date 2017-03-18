@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react';
+import Fans from '../icons/Fans';
 
 class IndexComponent extends Component {
 
@@ -18,6 +19,13 @@ class IndexComponent extends Component {
           paddingBottom: 15
         }}
       >
+        <Fans
+          color={'#fff'}
+          style={{
+            width: 140,
+            height: 140
+          }}
+        />
         <h1 style={{
           fontWeight: 300,
           color: appBar.textColor
