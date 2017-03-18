@@ -8,7 +8,7 @@ Fans 程序会有一些系统上的要求。
 
 你需要确保你的服务器上安装了下面的几个拓展：
 
-- PHP >= 5.3.12
+- PHP >= 5.6.*
 - OpenSSL PHP Extension
 - PDO PHP Extension
 - Mbstring PHP Extension
@@ -25,7 +25,7 @@ Fans 程序会有一些系统上的要求。
 
 > 这里讲解的是使用从 GitHub 获取源码的形式安装，而非 dist 安装。
 
-首先，你应当进入 [releases](https://github.com/medz/phpwind/releases) 页面，下载 Latest 的 Fsns 1.0 程序，选择 **source code** 下载源代码。
+首先，你应当进入 [releases](https://github.com/medz/phpwind/releases) 页面，下载 Latest 的 Fsns 程序，选择 **source code** 下载源代码。
 
 > 一般有 zip 和 tar.gz 两个版本，自行选择。
 
@@ -43,12 +43,17 @@ composer install
 
 完成后，打开你的网站 `https://yousite/install.php` 按照网页要求填写网站配置信息即可安装完成。
 
+> 在 Fans 1.1 开始会将根移动到 `/public` 目录下，1.1 之前版本依旧使用根为网站公开目录的形式配置，1.1 版本开始 配置 public 目录为网站的根。
 
 ## 配置
 
+### 公开目录
+
+在安装 Fans 之后，你需要配置你的 Web 服务器的根目录为 public 目录。 这个目录的 index.php 文件作为所有 HTTP 请求进入应用的前端处理器。
+
 ### 配置文件
 
-Fans 框架所有的配置文件都存放在 conf 目录下。每个选项都被加入文档，所以你可以自由的浏览文件，轻松的熟悉你的选项。
+Fans 框架所有的配置文件都存放在 config 目录下。每个选项都被加入文档，所以你可以自由的浏览文件，轻松的熟悉你的选项。
 
 ### 目录权限
 
@@ -56,11 +61,11 @@ Fans 框架所有的配置文件都存放在 conf 目录下。每个选项都被
 
 ## Web 服务器配置
 
-> 优雅连接，这个在 Fans 1.0 中保持和 phpwind 9 一致
+> 优雅连接，这个是必须配置，可以让网站服务器以优雅的链接访问动态动态网站内容，所有的链接请求，都应该配置到 `public/index.php` 上，因为这是 Fans 程序唯一的前端处理器。
 
 ### Apache
 
-Fans 已经为你做好了 Apache 的配置，通过 `.htaccess` 文件来让 URL 不要需要 index.php 即可访问。在 Apache 启用 优雅链接之前，请先确认是否开启了 *mod_rewrite* 模块，以便 .htaccess 文件发挥作用。
+Fans 已经为你做好了 Apache 的配置，通过 `public/.htaccess` 文件来让 URL 不要需要 index.php 即可访问。在 Apache 启用 优雅链接之前，请先确认是否开启了 *mod_rewrite* 模块，以便 .htaccess 文件发挥作用。
 
 如果 Fans 附带的 .htaccess 文件在 Apache 中无法使用的话，请尝试下方的做法：
 

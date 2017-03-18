@@ -39,7 +39,7 @@ class MainComponent extends Component {
         paddingTop: appBar.height
       }}>
         <AppBar
-          title={pathname !== '/' ? ' Fans' : ''}
+          title={pathname !== '/' ? 'phpwind Fans' : ''}
           iconElementRight={
             <IconButton
               href="https://github.com/medz/phpwind"

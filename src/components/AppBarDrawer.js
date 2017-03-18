@@ -68,7 +68,7 @@ class AppBarDrawerComponent extends Component {
         onRequestChange={handleCloseAppBar}
       >
         <AppBar
-          title=" Fans"
+          title="phpwind Fans"
           iconElementLeft={
             <IconButton>
               <NavigationClose />
