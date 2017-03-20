@@ -1,14 +1,19 @@
 import React, { Component, PropTypes } from 'react';
+import RaisedButton from 'material-ui/RaisedButton';
 import Fans from '../icons/Fans';
 
 class IndexComponent extends Component {
+
+  static propTypes = {
+    handleOpenAppBar: PropTypes.func.isRequired,
+  };
 
   static contextTypes = {
     muiTheme: PropTypes.object.isRequired,
   };
 
   render() {
-
+    const { handleOpenAppBar } = this.props;
     const { muiTheme: { appBar } } = this.context;
 
     return (
@@ -46,6 +51,14 @@ class IndexComponent extends Component {
         >
           使用 PHP 和 MySQL 开发的高性能社区系统
         </h2>
+        <RaisedButton
+          label="开始阅读"
+          secondary={true}
+          style={{
+            margin: 12
+          }}
+          onTouchTap={handleOpenAppBar}
+        />
       </div>
     );
   }

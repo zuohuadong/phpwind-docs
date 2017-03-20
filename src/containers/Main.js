@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { APP_BAR } from '../actions/types';
 import { open, close } from '../actions/appBar';
 import MainComponent from '../components/Main';
-import Index from '../components/Index';
+import Index from './Index';
 import Reader from './Reader';
 import { Route } from 'react-router-dom';
 
