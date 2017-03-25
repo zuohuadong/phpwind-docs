@@ -1,8 +1,8 @@
 {
-  "name": "phpwind-doc",
+  "name": "Notadd-Doc",
   "version": "1.0.0",
-  "author": "Seven Du <shiweidu@outlook.com>",
-  "license": "MIT",
+  "author": "notadd@ibenchu.com",
+  "license": "Apache2",
   "private": true,
   "devDependencies": {
     "babel-core": "^6.24.0",

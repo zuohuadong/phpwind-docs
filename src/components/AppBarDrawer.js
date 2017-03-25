@@ -123,13 +123,13 @@ class AppBarDrawerComponent extends Component {
           <ListItem
             containerElement="a"
             primaryText="GitHub"
-            href="https://github.com/medz/phpwind/fork"
+            href="https://github.com/notadd/notadd"
             leftIcon={<GitHub />}
           />
           <ListItem
             containerElement="a"
             primaryText="New issue"
-            href="https://github.com/medz/phpwind/issues/new"
+            href="https://github.com/notadd/notaddissues/new"
             leftIcon={<CommunicationForum />}
           />
         </List>

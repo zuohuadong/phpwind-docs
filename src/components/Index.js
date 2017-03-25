@@ -36,7 +36,7 @@ class IndexComponent extends Component {
           color: appBar.textColor
         }}
         >
-          phpwind Fans
+          Notadd
         </h1>
         <h2
           style={{
@@ -49,7 +49,7 @@ class IndexComponent extends Component {
             letterSpacing: 0
           }}
         >
-          使用 PHP 和 MySQL 开发的高性能社区系统
+          基于 Laravel 的下一代PHP开发框架
         </h2>
         <RaisedButton
           label="开始阅读"

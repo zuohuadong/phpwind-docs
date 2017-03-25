@@ -25,7 +25,7 @@ class FansTitleComponent extends Component {
             width: appBar.height
           }}
         />
-        &nbsp;Fans
+        &nbsp;Notadd
       </div>
     );
   }

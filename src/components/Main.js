@@ -43,8 +43,8 @@ class MainComponent extends Component {
           title={pathname !== '/' ? <FansTitle /> : ''}
           iconElementRight={
             <IconButton
-              href="https://github.com/medz/phpwind"
-              tooltip="点击浏览 phpwind Fans 代码仓库"
+              href="https://github.com/notadd/notadd"
+              tooltip="点击浏览 Notadd 代码仓库"
               tooltipPosition="bottom-left"
             >
               <GitHub color={appBar.textColor} />
